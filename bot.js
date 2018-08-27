@@ -331,6 +331,11 @@ client.on('message', message => {
     }
 });
 
+client.on('ready', () => {
+     client.user.setActivity("!help",{type: 'Playing'});
+
+});
+
 client.on('message', message => {
     if (message.content === 'general_commands') {
         let helpEmbed = new Discord.RichEmbed()
