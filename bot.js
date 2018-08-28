@@ -311,10 +311,13 @@ function play(guild, song) {
 
 	serverQueue.textChannel.send(`**${song.title}**, is now playing!`);
 }
-
-client.on('message', message => {
-    if (message.content === '!help') {
-        let helpEmbed = new Discord.RichEmbed()
+client.on("message", (message) => {
+    if (message.content == "!help") {
+        if (message.channel.type !== 'dm') message.channel.send("تم إرسال الرسال في الخاص")
+        message.author.createDM().then(dm => {
+            var songs = new Discord.RichEmbed()
+            .setColor("RANDOM")
+            .setAuthor(client.user.username, client.user.avatarURL)
         .setTitle('أوامر الميوزك...')
         .setDescription('برفكس البوت (!)')
         .addField('play', 'لتشغيل اغنية')
@@ -327,9 +330,13 @@ client.on('message', message => {
         .addField('np', 'اظهار الاغنية اللي انت مشغلها حاليا')
         .setFooter('تم برمجة البوت من قبل Hady Khaled')
         message.channel.send("تم ارسال الأوامر بالخاص")
-      message.auhor.send(helpEmbed);
+
+            dm.sendEmbed(songs).catch(() => {
+                message.channel.send(" يجب أن تفتح الخاص حتى أستطيع إرسالة الرسالة ");
+            })
+        })
     }
-});
+})
 const developers = ["442670807240671252"]
 const adminprefix = "1";
 client.on('message', message => {
