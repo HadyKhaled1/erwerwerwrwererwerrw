@@ -313,19 +313,19 @@ function play(guild, song) {
 
 
 client.on('message', message => {
-    if (message.content === 'help') {
+    if (message.content === '!help') {
         let helpEmbed = new Discord.RichEmbed()
         .setTitle('**أوامر الميوزك...**')
         .setDescription('**برفكس البوت (!)**')
-        .addField('play', 'لتشغيل اغنية')
-        .addField('join', 'دخول رومك الصوتي')
-        .addField('disconnect', 'الخروج من رومك الصوتي')
-        .addField('skip', 'تخطي الأغنية')
-        .addField('pause', 'ايقاف الاغنية مؤقتا')
-        .addField('resume', 'تكملة الاغنية')
-        .addField('queue', 'اظهار قائمة التشغيل')
-        .addField('np', 'اظهار الاغنية اللي انت مشغلها حاليا')
-        .setFooter('By Hady Khaled - Mr.Love 3K')
+        .addField('!play', 'لتشغيل اغنية')
+        .addField('!join', 'دخول رومك الصوتي')
+        .addField('!disconnect', 'الخروج من رومك الصوتي')
+        .addField('!skip', 'تخطي الأغنية')
+        .addField('!pause', 'ايقاف الاغنية مؤقتا')
+        .addField('!resume', 'تكملة الاغنية')
+        .addField('!queue', 'اظهار قائمة التشغيل')
+        .addField('!np', 'اظهار الاغنية اللي انت مشغلها حاليا')
+        .setFooter('!By Hady Khaled - Mr.Love 3K')
       message.channel.send(helpEmbed);
     }
 });
@@ -365,34 +365,6 @@ if (message.content.startsWith(adminprefix + 'setavatar')) {
 }
 });
 client.on('message', message => {
-    var prefix = "^";
-    
-        if (message.author.id === client.user.id) return;
-        if (message.guild) {
-       let embed = new Discord.RichEmbed()
-        let args = message.content.split(' ').slice(1).join(' ');
-    if(message.content.split(' ')[0] == prefix + 'bc') {
-        if (!args[1]) {
-    message.channel.send("**f!bc <message>**");
-    return;
-    }
-            message.guild.members.forEach(m => {
-       if(!message.member.hasPermission('ADMINISTRATOR')) return;
-                var bc = new Discord.RichEmbed()
-                .addField('» السيرفر :', `${message.guild.name}`)
-                .addField('» المرسل : ', `${message.author.username}#${message.author.discriminator}`)
-                .addField(' » الرسالة : ', args)
-                .setColor('#ff0000')
-                // m.send(`[${m}]`);
-                m.send(`${m}`,{embed: bc});
-            });
-        }
-        } else {
-            return;
-        }
-});
-
-client.on('message', message => {
     if (message.content === 'general_commands') {
         let helpEmbed = new Discord.RichEmbed()
         .setTitle('**أوامر عامة...**')
@@ -403,5 +375,4 @@ client.on('message', message => {
       message.channel.send(helpEmbed);
     }
 });
-
 client.login(process.env.BOT_TOKEN);
