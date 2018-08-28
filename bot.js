@@ -335,40 +335,60 @@ client.on("message", (message) => {
         })
     }
 })
-
-const developers = ["442670807240671252"]
-const adminprefix = "1";
+const developers = '442670807240671252';
+const adminprefix = '#';
 client.on('message', message => {
-    var argresult = message.content.split(` `).slice(1).join(' ');
-      if (!developers.includes(message.author.id)) return;
-      
-  if (message.content.startsWith(adminprefix + 'ply')) {
-    client.user.setGame(argresult);
-      message.channel.send(`**✅   ${argresult}**`)
-  } else 
-     if (message.content === (adminprefix + "leave")) {
-    message.guild.leave();        
-  } else  
-  if (message.content.startsWith(adminprefix + 'wt')) {
-  client.user.setActivity(argresult, {type:'WATCHING'});
-      message.channel.send(`**✅   ${argresult}**`)
-  } else 
-  if (message.content.startsWith(adminprefix + 'ls')) {
-  client.user.setActivity(argresult , {type:'LISTENING'});
-      message.channel.send(`**✅   ${argresult}**`)
-  } else 
-  if (message.content.startsWith(adminprefix + 'st')) {
-    client.user.setGame(argresult, "https://www.twitch.tv/idk");
-      message.channel.send(`**✅**`)
-  }
-  if (message.content.startsWith(adminprefix + 'setname')) {
-  client.user.setUsername(argresult).then
-      message.channel.send(`Changing The Name To ..**${argresult}** `)
-} else
-if (message.content.startsWith(adminprefix + 'setavatar')) {
-  client.user.setAvatar(argresult);
-    message.channel.send(`Changing The Avatar To :**${argresult}** `);
-}
+	if(!developers.includes(message.author.id)) return;
+	if(message.channel.type === 'dm') return;
+	
+	var argresult = message.content.split(' ').slice(1).join(' ');
+	var command = message.content.toLowerCase().split(" ")[0];
+	
+	if(command == adminprefix + 'ply') {
+		if(!argresult) return message.reply('**اكتب حالة اللعب من فضلك**');
+		if(argresult.length > 15) return message.reply('لا تستطيع تسمية حالة اللعب الى اكثر من 15 حرف');
+		if(argresult === client.user.presence.game.name) return message.reply('**حالة اللعب من اول كذا**');
+		
+		client.user.setActivity(argresult);
+		message.channel.send(`:white_check_mark: | Playing **${argresult}**`);
+		if(argresult.length > 15) return message.reply('لا تستطيع تسمية حالة اللعب الى اكثر من 15 حرف');
+	}else
+	if(command == adminprefix + 'leave') {
+		message.guild.leave();
+	}else
+	if(command == adminprefix + 'wt') {
+		if(!argresult) return message.reply('**اكتب حالة المشاهدة من فضلك**');
+		
+		client.user.setActivity(argresult, {type:'WATCHING'});
+		message.channel.send(`:white_check_mark: | Watching **${argresult}**`);
+		if(argresult.length > 15) return message.reply('لا تستطيع تسمية حالة اللعب الى اكثر من 15 حرف');
+	}else
+	if(command == adminprefix + 'ls') {
+		if(!argresult) return message.reply('**اكتب حالة الاستماع من فضلك**');
+		
+		client.user.setActivity(argresult, {type:'LISTENING'});
+		message.channel.send(`:white_check_mark: | Listening **${argresult}**`);
+		if(argresult.length > 15) return message.reply('لا تستطيع تسمية حالة اللعب الى اكثر من 15 حرف');
+	}else
+	if(command == adminprefix + 'st') {
+		if(!argresult) return message.reply('**اكتب حالة البث من فضلك**');
+		if(argresult.length > 15) return message.reply('لا تستطيع تسمية حالة اللعب الى اكثر من 15 حرف');
+		
+		client.user.setGame(argresult, "https://www.twitch.tv/idk");
+		message.channel.send(`:white_check_mark: | Streaming **${argresult}**`);
+	}
+	if(command == adminprefix + 'setname') {
+		if(!argresult) return message.reply('**اكتب اسم البوت الجديد من فضلك**');
+		if(argresult.length > 15) return message.reply('لا تستطيع تسمية البوت اكثر من 15 حرف');
+		if(argresult === client.user.username) return message.reply('**البوت مسمى من قبل بهذا الاسم**');
+		
+		client.user.setUsername(argresult).then
+		message.channel.send(`:white_check_mark: | Changing The Name To **${argresult}**`)
+	}else
+	if(command == adminprefix + 'setavatar') {
+		client.user.setAvatar(argresult);
+		message.channel.send(`:white_check_mark: | Changing The **Avatar** To :\n${argresult}`);
+	}
 });
 client.on('message', message => {
     if (message.content === 'general_commands') {
