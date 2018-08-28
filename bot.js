@@ -310,8 +310,6 @@ function play(guild, song) {
 
 	serverQueue.textChannel.send(`**${song.title}**, is now playing!`);
 }
-
-
 client.on('message', message => {
     if (message.content === '!help') {
         let helpEmbed = new Discord.RichEmbed()
@@ -329,7 +327,6 @@ client.on('message', message => {
       message.channel.send(helpEmbed);
     }
 });
-
 const developers = ["442670807240671252"]
 const adminprefix = "*";
 client.on('message', message => {
