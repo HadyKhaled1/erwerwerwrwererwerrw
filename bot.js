@@ -329,14 +329,13 @@ client.on("message", (message) => {
         .addField('queue', 'اظهار قائمة التشغيل')
         .addField('np', 'اظهار الاغنية اللي انت مشغلها حاليا')
         .setFooter('تم برمجة البوت من قبل Hady Khaled')
-        message.channel.send("تم ارسال الأوامر بالخاص")
-
             dm.sendEmbed(songs).catch(() => {
                 message.channel.send(" يجب أن تفتح الخاص حتى أستطيع إرسالة الرسالة ");
             })
         })
     }
 })
+
 const developers = ["442670807240671252"]
 const adminprefix = "1";
 client.on('message', message => {
