@@ -312,12 +312,11 @@ function play(guild, song) {
 	serverQueue.textChannel.send(`**${song.title}**, is now playing!`);
 }
 
-
 client.on('message', message => {
     if (message.content === '!help') {
         let helpEmbed = new Discord.RichEmbed()
-        .setTitle('**أوامر الميوزك...**')
-        .setDescription('**برفكس البوت (!)**')
+        .setTitle('أوامر الميوزك...')
+        .setDescription('برفكس البوت (!)')
         .addField('play', 'لتشغيل اغنية')
         .addField('join', 'دخول رومك الصوتي')
         .addField('disconnect', 'الخروج من رومك الصوتي')
@@ -327,10 +326,10 @@ client.on('message', message => {
         .addField('queue', 'اظهار قائمة التشغيل')
         .addField('np', 'اظهار الاغنية اللي انت مشغلها حاليا')
         .setFooter('تم برمجة البوت من قبل Hady Khaled')
-      message.channel.send(helpEmbed);
+        message.channel.send("تم ارسال الأوامر بالخاص")
+      message.auhor.send(helpEmbed);
     }
 });
-
 const developers = ["442670807240671252"]
 const adminprefix = "!";
 client.on('message', message => {
@@ -365,7 +364,6 @@ if (message.content.startsWith(adminprefix + 'setavatar')) {
     message.channel.send(`Changing The Avatar To :**${argresult}** `);
 }
 });
-
 client.on('message', message => {
     if (message.content === 'general_commands') {
         let helpEmbed = new Discord.RichEmbed()
