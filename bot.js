@@ -308,33 +308,20 @@ function play(guild, song) {
 		})
 		.on('error', error => console.error(error));
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-
-	serverQueue.textChannel.send(`**${song.title}**, is now playing!`);
-}
-client.on("message", (message) => {
-    if (message.content == "!help") {
-        if (message.channel.type !== 'dm') message.channel.send("تم إرسال الرسال في الخاص")
-        message.author.createDM().then(dm => {
-            var songs = new Discord.RichEmbed()
-            .setColor("RANDOM")
-            .setAuthor(client.user.username, client.user.avatarURL)
+        serverQueue.textChannel.send(`**${song.title}**, is now playing!`);	
+   });
+client.on('message', message => {
+    if (message.content === '!help') {
+        let helpEmbed = new Discord.RichEmbed()
         .setTitle('أوامر الميوزك...')
         .setDescription('برفكس البوت (!)')
-        .addField('play', 'لتشغيل اغنية')
-        .addField('join', 'دخول رومك الصوتي')
-        .addField('disconnect', 'الخروج من رومك الصوتي')
-        .addField('skip', 'تخطي الأغنية')
-        .addField('pause', 'ايقاف الاغنية مؤقتا')
-        .addField('resume', 'تكملة الاغنية')
-        .addField('queue', 'اظهار قائمة التشغيل')
-        .addField('np', 'اظهار الاغنية اللي انت مشغلها حاليا')
-        .setFooter('تم برمجة البوت من قبل Hady Khaled')
-            dm.sendEmbed(songs).catch(() => {
-                message.channel.send(" يجب أن تفتح الخاص حتى أستطيع إرسالة الرسالة ");
-            })
-        })
-    }
-})
+        .addField(' !play', 'لتشغيل اغنية')
+        .addField(" !join', 'دخول رومك الصوتي')
+        .addField(' !disconnect', 'الخروج من رومك الصوتي')
+        .addField(' !skip', 'تخطي الأغنية')
+        .addField(' !pause', 'ايقاف الاغنية مؤقتا')
+        .addField(' !resume', 'تكملة الاغنية')
+}};
 const developers = '442670807240671252';
 const adminprefix = '#';
 client.on('message', message => {
@@ -388,8 +375,8 @@ client.on('message', message => {
 	if(command == adminprefix + 'setavatar') {
 		client.user.setAvatar(argresult);
 		message.channel.send(`:white_check_mark: | Changing The **Avatar** To :\n${argresult}`);
-	}
-});
+	);
+}};
 client.on('message', message => {
     if (message.content === 'general_commands') {
         let helpEmbed = new Discord.RichEmbed()
